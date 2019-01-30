@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.giga.dao.QuestionDAO">
+	<sql id="TABLE_NAME"> QUESTION </sql>
+	<sql id="SELECT_FIELDS"> ID,TITLE,CONTENT,USER_ID,CREATED_DATE,COMMENT_COUNT </sql>
+
+	<select id="selectLatestQuestions" resultType="Question">
+		SELECT
+		<include refid="SELECT_FIELDS"/>
+		FROM
+		<include refid="TABLE_NAME"/>
+		<!--<if test="userId != 0">-->
+			<!--WHERE USER_ID = #{userId}-->
+		<!--</if>-->
+		ORDER BY ID DESC
+		LIMIT #{offset},#{limit}
+	</select>
+</mapper>
